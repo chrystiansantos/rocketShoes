@@ -2,9 +2,8 @@ import produce from 'immer';
 /* state consiste no state anterior da action ser executada, action sao os dados que
 o reducer acaba de receber atraves do evento disparado */
 export default function cart(state = [], action) {
-  console.log(state);
   switch (action.type) {
-    case 'ADD_TO_CART':
+    case '@cart/ADD':
       return produce(state, draft => {
         const productIndex = draft.findIndex(p => p.id === action.product.id);
         if (productIndex >= 0) {
@@ -16,10 +15,10 @@ export default function cart(state = [], action) {
           });
         }
       });
-    case 'REMOVE_FROM_CART':
+    case '@cart/REMOVE':
       return produce(state, draft => {
         const productIndex = draft.findIndex(p => p.id === action.id);
-        if (productIndex) {
+        if (productIndex >= 0) {
           draft.splice(productIndex, 1);
         }
       });
