@@ -2,11 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { MdShoppingBasket } from 'react-icons/md';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Logo from '../../assets/images/logo.svg';
 import { Container, Cart } from './styles';
 
-function Header({ cartSize }) {
+export default function Header() {
+  const cartSize = useSelector(state => state.cart.length);
   return (
     <Container>
       {/* Assim que ele clicar no Link sera redirecionado para a pagina principal */}
@@ -23,8 +24,3 @@ function Header({ cartSize }) {
     </Container>
   );
 }
-/* Este state, sera todo o estado do redux, e cart e o nome que eu declarei dentro de
-rootReducer */
-export default connect(state => ({
-  cartSize: state.cart.length,
-}))(Header);
